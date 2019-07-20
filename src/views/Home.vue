@@ -1,18 +1,36 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-layout align-center justify-center row fill-height>
+    <v-flex lg2 md3 sm4 xs6>
+      <Member v-bind="members[left]" target="left" />
+    </v-flex>
+    <v-flex lg2 md3 sm4 xs6>
+      <Member v-bind="members[right]" target="right" />
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import Member from "../components/Member";
+import { mapState } from "vuex";
 
+// console.log(members)
 export default {
-  name: 'home',
   components: {
-    HelloWorld
-  }
-}
+    Member
+  },
+  data: () => ({}),
+  //   created: function() {
+  //   if (!this.$props.sorted) {
+  //     this.$router.push({ name: "home" });
+  //   }
+  // },
+  computed: mapState({
+    members: state => state.members,
+    left: state => state.left,
+    right: state => state.right
+  })
+};
 </script>
+
+<style>
+</style>
