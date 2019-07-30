@@ -19,11 +19,10 @@ export default {
     Member
   },
   data: () => ({}),
-  //   created: function() {
-  //   if (!this.$props.sorted) {
-  //     this.$router.push({ name: "home" });
-  //   }
-  // },
+  created: function() {
+    //shuffle the member list
+    this.$store.dispatch("init", this.members);
+  },
   computed: mapState({
     members: state => state.members,
     left: state => state.left,

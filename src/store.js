@@ -15,7 +15,7 @@ export default new Vuex.Store({
     rightStart: 1,
     width: 1,
     end: 2,
-    result: members,
+    result: [],
     temp: []
   },
   mutations: {
@@ -85,12 +85,22 @@ export default new Vuex.Store({
         return item['name'];
       });
       console.log("result:", names)
+    },
+    shuffle(state, array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
+        [array[i], array[j]] = [array[j], array[i]]; // swap elements
+      }
+      state.result = array
     }
 
   },
   actions: {
     select({ commit }, target) {
       commit('sort', target)
+    },
+    init({ commit }, array) {
+      commit('shuffle', array)
     }
   }
 })
