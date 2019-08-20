@@ -1,7 +1,20 @@
 <template>
-  <ul id="result">
-    <li v-for="(item, index) in result" v-bind:key="index">{{ index+1 }} {{ item.name }}</li>
-  </ul>
+  <v-layout align-center justify-center row fill-height>
+    <v-simple-table id="result">
+      <thead>
+        <tr>
+          <th>順位</th>
+          <th>名前</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(item, index) in result" v-bind:key="index">
+          <td>{{ index + 1 }}</td>
+          <td>{{ item.name }}</td>
+        </tr>
+      </tbody>
+    </v-simple-table>
+  </v-layout>
 </template>
 
 <script>
@@ -23,6 +36,9 @@ export default {
 
 <style lang="scss" scoped>
 #result {
-  list-style: none;
+  th,
+  td {
+    font-size: 20px;
+  }
 }
 </style>

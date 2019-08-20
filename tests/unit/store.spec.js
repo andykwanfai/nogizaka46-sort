@@ -38,7 +38,7 @@ test('test sorting result', () => {
   expect(target).not.toMatchObject(store.state.result)
   expect(target).not.toMatchObject(members)
 
-  while (!store.state.completed) {
+  while (!store.state.sorted) {
     for (let member of target) {
       if (isEqual(member, store.state.result[store.state.left])) {
         store.dispatch('select', 'left')

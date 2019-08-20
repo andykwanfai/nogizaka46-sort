@@ -17,7 +17,7 @@ const state = {
   end: 2,
   result: [],
   temp: [],
-  completed: false
+  sorted: false
 }
 
 const store = ({

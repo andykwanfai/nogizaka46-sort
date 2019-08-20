@@ -13,7 +13,6 @@
 import Member from "../components/Member";
 import { mapState } from "vuex";
 
-// console.log(members)
 export default {
   components: {
     Member

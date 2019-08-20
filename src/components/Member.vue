@@ -2,7 +2,7 @@
   <v-card v-on:click="select" class="ma-1" hover>
     <v-img v-bind:src="`${publicPath}img/single/23/${img}.jpg`"></v-img>
     <v-card-title class="justify-center">
-      <h2>{{name}}</h2>
+      <b>{{name}}</b>
     </v-card-title>
   </v-card>
 </template>
@@ -22,4 +22,9 @@ export default {
 </script>
 
 <style>
+b {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 </style>

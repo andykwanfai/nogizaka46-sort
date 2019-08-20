@@ -63,8 +63,8 @@ export const sort = (state, target) => {
 
 
   if (state.width >= state.end) {
-    state.completed = true
-    router.push({ name: 'result', params: { sorted: true } })
+    state.sorted = true
+    router.push({ name: 'result', params: { sorted: state.sorted } })
   }
 
 }
