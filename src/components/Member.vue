@@ -1,5 +1,5 @@
 <template>
-  <v-card v-on:click="select" class="ma-1" hover>
+  <v-card v-ripple="{ center: true }" v-on:click="select" class="ma-1" hover>
     <v-img v-bind:src="`${publicPath}img/single/23/${img}.jpg`"></v-img>
     <v-card-title class="justify-center">
       <b>{{name}}</b>

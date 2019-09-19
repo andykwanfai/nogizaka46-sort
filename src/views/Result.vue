@@ -14,30 +14,38 @@
         </tr>
       </tbody>
     </v-simple-table>
-    <v-btn class="ma-2" color="blue" dark @click.stop="dialog = true">
+    <v-btn class="ma-1" color="blue" dark @click.stop="dialog = true">
       <v-icon dark>mdi-share-variant</v-icon>
     </v-btn>
     <v-dialog v-model="dialog" max-width="500">
       <v-card>
         <v-card-title>
           <div class="flex-grow-1"></div>
-          <v-btn text icon large>
+          <v-btn text>
             <v-icon @click="dialog = false">close</v-icon>
           </v-btn>
         </v-card-title>
         <v-card-text>
-          <v-textarea id="result-string" outlined no-resize v-bind:value="resultString()"></v-textarea>
+          <v-textarea
+            id="result-string"
+            readonly
+            hide-details
+            outlined
+            no-resize
+            v-bind:value="resultString()"
+          ></v-textarea>
         </v-card-text>
         <v-divider></v-divider>
-        <div id="copy-label">コピー：</div>
+        <div id="copy-label">Copy:</div>
         <v-card-actions>
-          <v-btn fab dark color="grey" @click="range=0;copy()">
+          <v-btn fab dark color="blue-grey" @click="range=0;copy()">
             <!-- <v-icon>mdi-content-copy</v-icon> -->
             ALL
           </v-btn>
-          <v-btn fab dark color="grey" @click="range=5;copy()">TOP 5</v-btn>
-          <v-btn fab dark color="grey" @click="range=10;copy()">TOP 10</v-btn>
+          <v-btn fab dark color="blue-grey" @click="range=5;copy()">TOP 5</v-btn>
+          <v-btn fab dark color="blue-grey" @click="range=10;copy()">TOP 10</v-btn>
         </v-card-actions>
+        <v-snackbar v-model="snackbar" timeout="1500" top multi-line>Copied</v-snackbar>
       </v-card>
     </v-dialog>
   </v-layout>
@@ -47,7 +55,7 @@
 import { mapState } from "vuex";
 export default {
   props: ["sorted"],
-  data: () => ({ dialog: false, range: 0 }),
+  data: () => ({ dialog: false, range: 0, snackbar: false }),
   created: function() {
     if (!this.$props.sorted) {
       this.$router.push({ name: "home" });
@@ -71,12 +79,14 @@ export default {
       return string;
     },
     copy: async function() {
+      this.snackbar = false;
       await setTimeout(function() {}, 100);
       const copyText = document.getElementById("result-string");
       if (copyText) {
         copyText.select();
         copyText.setSelectionRange(0, 99999);
         document.execCommand("copy");
+        this.snackbar = true;
       }
     }
   },
