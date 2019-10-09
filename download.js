@@ -13,5 +13,7 @@ function saveImageToDisk(url, localPath) {
 const folder = '24'
 
 members.map((member) => {
-  saveImageToDisk(`https://img.nogizaka46.com/www/member/img/${member.img}.jpg`, `./public/img/${folder}/${member.img}.jpg`)
+  if (!member.graduation) {
+    saveImageToDisk(`https://img.nogizaka46.com/www/member/img/${member.img}.jpg`, `./public/img/${folder}/${member.img}.jpg`)
+  }
 })

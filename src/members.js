@@ -22,12 +22,14 @@ export const members = [
   {
     'name': '斉藤 優里',
     'generation': 1,
-    'img': 'saitouyuuri_prof'
+    'img': 'saitouyuuri_prof',
+    'graduation': '23rd single'
   },
   {
     'name': '桜井 玲香',
     'generation': 1,
-    'img': 'sakuraireika_prof'
+    'img': 'sakuraireika_prof',
+    'graduation': '23rd single'
   },
   {
     'name': '白石 麻衣',
@@ -67,7 +69,8 @@ export const members = [
   {
     'name': '伊藤 かりん',
     'generation': 2,
-    'img': 'itoukarin_prof'
+    'img': 'itoukarin_prof',
+    'graduation': '23rd single'
   },
   {
     'name': '伊藤 純奈',

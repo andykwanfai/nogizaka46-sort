@@ -1,8 +1,13 @@
-import { cloneDeep } from 'lodash'
+import { clone } from 'lodash'
 import router from '../router';
 
 export const shuffle = (state) => {
-  let array = cloneDeep(state.members)
+  let array = []
+  state.members.map((e) => {
+    if (!e.graduation) {
+      array.push(clone(e))
+    }
+  })
   for (let i = array.length - 1; i > 0; i--) {
     let j = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
     [array[i], array[j]] = [array[j], array[i]]; // swap elements
