@@ -5,6 +5,11 @@
 yarn install
 ```
 
+## Download profile img
+```
+yarn run download
+```
+
 ### Compiles and hot-reloads for development
 ```
 yarn run serve
