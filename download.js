@@ -10,10 +10,10 @@ function saveImageToDisk(url, localPath) {
   });
 }
 
-const folder = '24'
+const folder = '24th single'
 
 members.map((member) => {
   if (!member.graduation) {
-    saveImageToDisk(`https://img.nogizaka46.com/www/member/img/${member.img}.jpg`, `./public/img/${folder}/${member.img}.jpg`)
+    saveImageToDisk(`https://img.nogizaka46.com/www/member/img/${member.img}.jpg`, `./public/img/profile pic/${folder}/${member.img}.jpg`)
   }
 })

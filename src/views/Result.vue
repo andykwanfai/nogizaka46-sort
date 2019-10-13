@@ -8,8 +8,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(item, index) in result" v-bind:key="index">
-          <td>{{ index + 1 }}</td>
+        <tr v-for="(item, index) in rankResult()" v-bind:key="index">
+          <td>{{ item.rank }}</td>
           <td>{{ item.name }}</td>
         </tr>
       </tbody>
@@ -45,7 +45,7 @@
           <v-btn fab dark color="blue-grey" @click="range=5;copy()">TOP 5</v-btn>
           <v-btn fab dark color="blue-grey" @click="range=10;copy()">TOP 10</v-btn>
         </v-card-actions>
-        <v-snackbar v-model="snackbar" timeout="1500" top multi-line>Copied</v-snackbar>
+        <v-snackbar v-model="snackbar" :timeout="1500" top multi-line>Copied</v-snackbar>
       </v-card>
     </v-dialog>
   </v-layout>
@@ -57,15 +57,34 @@ export default {
   props: ["sorted"],
   data: () => ({ dialog: false, range: 0, snackbar: false }),
   created: function() {
-    if (!this.$props.sorted) {
+    if (!this.$props.sorted && process.env.NODE_ENV === "production") {
       this.$router.push({ name: "home" });
+    } else {
+      this.$store.dispatch("init");
     }
-    // this.$store.dispatch("init");
   },
   methods: {
+    rankResult: function() {
+      const result = this.$store.state.result;
+      let rank = [];
+      let currentRanking = 1;
+      rank.push({ name: result[0].name, rank: currentRanking });
+      for (let i = 1; i < result.length; i++) {
+        if (
+          (result[i].drawId || result[i - 1].drawId) &&
+          result[i].drawId === result[i - 1].drawId
+        ) {
+          rank.push({ name: result[i].name, rank: currentRanking });
+        } else {
+          currentRanking = i + 1;
+          rank.push({ name: result[i].name, rank: i + 1 });
+        }
+      }
+      return rank;
+    },
     resultString: function() {
       let string = "";
-      const result = this.$store.state.result;
+      const result = this.rankResult();
       let length;
       if (this.range === 0) {
         length = result.length;
@@ -74,7 +93,7 @@ export default {
       }
 
       for (let i = 0; i < length; i++) {
-        string += `${i + 1} ${result[i].name}\n`;
+        string += `${result[i].rank} ${result[i].name}\n`;
       }
       return string;
     },

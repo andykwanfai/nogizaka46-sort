@@ -2,12 +2,8 @@ import { clone } from 'lodash'
 import router from '../router';
 
 export const shuffle = (state) => {
-  let array = []
-  state.members.map((e) => {
-    if (!e.graduation) {
-      array.push(clone(e))
-    }
-  })
+  let array = state.members.filter(member => !member.graduation)
+
   for (let i = array.length - 1; i > 0; i--) {
     let j = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
     [array[i], array[j]] = [array[j], array[i]]; // swap elements
@@ -18,28 +14,50 @@ export const shuffle = (state) => {
 export const sort = (state, target) => {
   //bottom up merge sort
   let { temp, result } = state
+  const leftMember = result[state.left]
+  const rightMember = result[state.right]
   switch (target) {
     case "left":
-      temp.push(result[state.left])
+      temp.push(leftMember)
       state.left++
       break
     case "right":
-      temp.push(result[state.right])
+      temp.push(rightMember)
+      state.right++
+      break
+    case "draw":
+      if (!leftMember.drawId && !rightMember.drawId) {
+        //both elements did not draw before
+        leftMember.drawId = state.drawId
+        rightMember.drawId = state.drawId
+        state.drawId++
+      } else if (leftMember.drawId !== rightMember.drawId) {
+        //left element has drawid
+        rightMember.drawId = leftMember.drawId
+      } else if (!leftMember.drawId && rightMember.drawId) {
+        //left element do not has drawid but right element has
+        leftMember.drawId = rightMember.drawId
+      }
+      temp.push(leftMember, rightMember)
+      state.left++
       state.right++
       break
   }
 
-  if (state.left >= state.rightStart || state.right >= state.end) {//finish one merge
-    // console.log("finish merge")
+  //finish one merge
+  if (state.left >= state.rightStart || state.right >= state.end) {
     if (state.left === state.rightStart) {
+      //if no element in left side, push all element in right side
       state.temp.push(...state.result.slice(state.right, state.end))
     } else if (state.right === state.end) {
-
+      //if no element in right side, push all element in left side
       state.temp.push(...state.result.slice(state.left, state.rightStart))
-      // console.log("debug", state.temp)
     }
 
-    temp.map(function (item, i) { result[state.leftStart + i] = item; });
+    //update the reuslt
+    temp.map(function (item, i) {
+      result[state.leftStart + i] = item;
+    });
 
 
     //set pointer to next merge
@@ -49,10 +67,11 @@ export const sort = (state, target) => {
     state.right = state.rightStart
 
 
-
-    if (!result[state.leftStart] || !result[state.rightStart]) {//only left part need to merge, no need to choose
+    //if only left part remaining(i.e. no right part), no need to choose
+    if (!result[state.leftStart] || !result[state.rightStart]) {
       if (result[state.leftStart]) {
-        state.temp.push(...state.result.slice(state.left, state.end))//push all left elements to temp
+        //push all left elements to temp
+        state.temp.push(...state.result.slice(state.left, state.end))
       }
       state.width *= 2
       //reset pointer at beginning
@@ -62,14 +81,18 @@ export const sort = (state, target) => {
       state.right = state.rightStart
     }
 
-    state.end = Math.min(state.leftStart + state.width * 2, state.members.length)
+    state.end = Math.min(state.leftStart + state.width * 2, state.result.length)
     state.temp = []
   }
 
 
-  if (state.width >= state.end) {
+  if (state.width >= state.end) {//end of sorting
     state.sorted = true
     router.push({ name: 'result', params: { sorted: state.sorted } })
   }
 
+}
+
+export const addCounter = (state) => {
+  state.counter++
 }

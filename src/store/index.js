@@ -9,15 +9,17 @@ Vue.use(Vuex)
 
 const state = {
   members: members,
-  left: 0,
-  right: 1,
-  leftStart: 0,
-  rightStart: 1,
-  width: 1,
-  end: 2,
+  left: 0, //pointer of the left part of the merge
+  right: 1, //pointer of the right part of the merge
+  leftStart: 0, //start position of the left merge
+  rightStart: 1, //start position of the right merge
+  width: 1, //width of the merge
+  end: 2, //ending position of one merge
   result: [],
   temp: [],
-  sorted: false
+  sorted: false,
+  drawId: 1, //indicate the group of draw member
+  counter: 1, //count the number of selection
 }
 
 const store = ({
