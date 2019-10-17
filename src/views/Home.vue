@@ -30,6 +30,13 @@
             </v-hover>
           </v-flex>
         </v-layout>
+        <v-layout justify-center row>
+          <v-flex lg4 md6 sm8 xs11>
+            <v-btn id="undo-btn" color="blue" v-on:click="undo" dark>
+              <v-icon left>mdi-reply</v-icon>undo
+            </v-btn>
+          </v-flex>
+        </v-layout>
       </v-flex>
     </v-layout>
   </v-container>
@@ -38,12 +45,13 @@
 <script>
 import Member from "../components/Member";
 import { mapState } from "vuex";
+import { history } from "../main";
 
 export default {
   components: {
     Member
   },
-  data: () => ({}),
+  data: () => ({ isDisable: true }),
   created: function() {
     // shuffle the member list
     this.$store.dispatch("init");
@@ -57,6 +65,11 @@ export default {
   methods: {
     select: function() {
       this.$store.dispatch("select", "draw");
+    },
+    undo: function() {
+      if (history.length > 1) {
+        this.$store.replaceState(history.pop());
+      }
     }
   }
 };
@@ -65,5 +78,8 @@ export default {
 <style scoped>
 b {
   font-size: 1.5rem;
+}
+#undo-btn {
+  margin-top: 10px;
 }
 </style>

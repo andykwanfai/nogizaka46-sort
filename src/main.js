@@ -7,10 +7,17 @@ import './registerServiceWorker'
 import vuetify from './plugins/vuetify'
 import 'roboto-fontface/css/roboto/roboto-fontface.css'
 import '@mdi/font/css/materialdesignicons.css'
+import { cloneDeep } from 'lodash'
 
 Vue.config.productionTip = false
 
 const store = new Vuex.Store(storeConfig)
+
+export const history = []
+
+store.subscribeAction((action, state) => {
+  history.push(cloneDeep(state))
+});
 
 new Vue({
   router,
