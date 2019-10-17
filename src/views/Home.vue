@@ -3,7 +3,7 @@
     <v-layout align-center justify-center row>
       <v-flex>
         <v-layout justify-center row>
-          <v-flex lg4 md6 sm8 xs12>Battle No. {{counter}}</v-flex>
+          <v-flex lg4 md6 sm8 xs11>Battle No. {{counter}}</v-flex>
         </v-layout>
         <v-layout justify-center row>
           <v-flex lg2 md3 sm4 xs6>
@@ -14,7 +14,7 @@
           </v-flex>
         </v-layout>
         <v-layout justify-center row>
-          <v-flex lg4 md6 sm8 xs12>
+          <v-flex lg4 md6 sm8 xs11>
             <v-hover v-slot:default="{ hover }">
               <v-btn
                 id="draw-btn"
@@ -24,7 +24,6 @@
                 color="secondary"
                 v-on:click="select"
                 height="56px"
-                class="ma-1"
               >
                 <b>引き分け</b>
               </v-btn>
@@ -46,7 +45,7 @@ export default {
   },
   data: () => ({}),
   created: function() {
-    //shuffle the member list
+    // shuffle the member list
     this.$store.dispatch("init");
   },
   computed: mapState({

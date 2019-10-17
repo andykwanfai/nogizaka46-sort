@@ -231,6 +231,6 @@ export const members = [
     'name': '矢久保 美緒',
     'generation': 4,
     'img': 'yakubomio_prof'
-  },
+  }
 
 ]

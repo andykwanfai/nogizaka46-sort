@@ -53,6 +53,7 @@
 
 <script>
 import { mapState } from "vuex";
+import { compressToEncodedURIComponent } from "lz-string";
 export default {
   props: ["sorted"],
   data: () => ({ dialog: false, range: 0, snackbar: false }),
@@ -82,6 +83,24 @@ export default {
       }
       return rank;
     },
+    encodeResult: function() {
+      let string = "";
+      const result = this.rankResult();
+      const members = this.$store.state.members;
+      const name = "abc";
+      const time = new Date().getTime();
+      string += `${name}-${time}-`;
+      result.map(e => {
+        string +=
+          this.addZero(e.rank) +
+          this.addZero(
+            members.findIndex(member => {
+              return member.name === e.name;
+            })
+          );
+      });
+      return compressToEncodedURIComponent(string);
+    },
     resultString: function() {
       let string = "";
       const result = this.rankResult();
@@ -95,6 +114,7 @@ export default {
       for (let i = 0; i < length; i++) {
         string += `${result[i].rank} ${result[i].name}\n`;
       }
+      // console.log(this.encodeResult());
       return string;
     },
     copy: async function() {
@@ -107,6 +127,10 @@ export default {
         document.execCommand("copy");
         this.snackbar = true;
       }
+    },
+    addZero: function(n) {
+      // add zero to single digit number
+      return n >= 0 && n < 10 ? "0" + n : "" + n;
     }
   },
   computed: {

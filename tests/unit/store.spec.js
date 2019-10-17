@@ -33,7 +33,7 @@ test('test sorting result', () => {
   localVue.use(Vuex)
   const store = new Vuex.Store(cloneDeep(storeConfig))
   store.dispatch('init', members)
-  const target = cloneDeep(store.state.result) //get a shuffled list for reference
+  const target = cloneDeep(store.state.result) // get a shuffled list for reference
   store.dispatch('init', members)
   expect(target).not.toMatchObject(store.state.result)
   expect(target).not.toMatchObject(members)
