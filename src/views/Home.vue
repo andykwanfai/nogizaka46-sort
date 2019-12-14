@@ -45,16 +45,21 @@
 <script>
 import Member from "../components/Member";
 import { mapState } from "vuex";
-import { history } from "../main";
+import { cloneDeep } from "lodash";
 
 export default {
   components: {
     Member
   },
-  data: () => ({ isDisable: true }),
+  data: () => ({ isDisable: true, history: [] }),
   created: function() {
     // shuffle the member list
     this.$store.dispatch("init");
+
+    //stack the state of comparison
+    this.$store.subscribeAction((action, state) => {
+      this.history.push(cloneDeep(state));
+    });
   },
   computed: mapState({
     result: state => state.result,
@@ -67,8 +72,8 @@ export default {
       this.$store.dispatch("select", "draw");
     },
     undo: function() {
-      if (history.length > 1) {
-        this.$store.replaceState(history.pop());
+      if (this.history.length > 0) {
+        this.$store.replaceState(this.history.pop());
       }
     }
   }
