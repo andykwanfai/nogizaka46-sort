@@ -10,7 +10,7 @@ function saveImageToDisk(url, localPath) {
   });
 }
 
-const folder = '24th single'
+const folder = '25th single'
 
 members.map((member) => {
   if (!member.graduation) {
