@@ -1,0 +1,20 @@
+{
+  "name": "乃木坂46ソート",
+  "short_name": "nogizaka46-sort",
+  "icons": [
+    {
+      "src": "./img/icons/Nogizaka46.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./img/icons/Nogizaka46.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#4DBA87"
+}
