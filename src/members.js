@@ -231,6 +231,31 @@ export const members = [
     'name': '矢久保 美緒',
     'generation': 4,
     'img': 'yakubomio_prof'
+  },
+  {
+    'name': '黒見 明香',
+    'generation': 4,
+    'img': 'kuromiharuka_prof'
+  },
+  {
+    'name': '佐藤 璃果',
+    'generation': 4,
+    'img': 'satourika_prof'
+  },
+  {
+    'name': '林 瑠奈',
+    'generation': 4,
+    'img': 'hayashiruna_prof'
+  },
+  {
+    'name': '松尾 美佑',
+    'generation': 4,
+    'img': 'mastuomiyu_prof'
+  },
+  {
+    'name': '弓木 奈於',
+    'generation': 4,
+    'img': 'yumikinao_prof'
   }
 
 ]

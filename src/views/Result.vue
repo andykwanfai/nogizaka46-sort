@@ -58,10 +58,12 @@ export default {
   props: ["sorted"],
   data: () => ({ dialog: false, range: 0, snackbar: false }),
   created: function() {
-    if (!this.$props.sorted && process.env.NODE_ENV === "production") {
-      this.$router.push({ name: "home" });
-    } else {
-      this.$store.dispatch("init");
+    if (!this.$props.sorted) {
+      if (process.env.NODE_ENV === "production") {
+        this.$router.push({ name: "home" });
+      } else {
+        this.$store.dispatch("init");
+      }
     }
   },
   methods: {
