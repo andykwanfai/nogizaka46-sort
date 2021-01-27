@@ -12,7 +12,8 @@ export const members = [
   {
     'name': '井上 小百合',
     'generation': 1,
-    'img': 'inouesayuri_prof'
+    'img': 'inouesayuri_prof',
+    'graduation': '25th single'
   },
   {
     'name': '齋藤 飛鳥',
@@ -34,7 +35,8 @@ export const members = [
   {
     'name': '白石 麻衣',
     'generation': 1,
-    'img': 'shiraishimai_prof'
+    'img': 'shiraishimai_prof',
+    'graduation': '25th single'
   },
   {
     'name': '高山 一実',
@@ -44,7 +46,8 @@ export const members = [
   {
     'name': '中田 花奈',
     'generation': 1,
-    'img': 'nakadakana_prof'
+    'img': 'nakadakana_prof',
+    'graduation': '25th single'
   },
   {
     'name': '樋口 日奈',
@@ -85,7 +88,8 @@ export const members = [
   {
     'name': '佐々木 琴子',
     'generation': 2,
-    'img': 'sasakikotoko_prof'
+    'img': 'sasakikotoko_prof',
+    'graduation': '25th single'
   },
   {
     'name': '新内 眞衣',
@@ -250,7 +254,7 @@ export const members = [
   {
     'name': '松尾 美佑',
     'generation': 4,
-    'img': 'mastuomiyu_prof'
+    'img': 'matsuomiyu_prof'
   },
   {
     'name': '弓木 奈於',
