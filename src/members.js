@@ -109,7 +109,8 @@ export const members = [
   {
     'name': '堀 未央奈',
     'generation': 2,
-    'img': 'horimiona_prof'
+    'img': 'horimiona_prof',
+    'graduation': '26th single'
   },
   {
     'name': '山崎 怜奈',
